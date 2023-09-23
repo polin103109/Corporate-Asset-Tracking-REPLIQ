@@ -24,6 +24,11 @@ class Device(models.Model):
     device_name = models.CharField(max_length=100)
     serial_number = models.CharField(max_length=50, unique=True)
     device_info = models.CharField(max_length=100)
+    status = models.CharField(
+        max_length=20,
+        choices=[('assigned', 'Assigned'), ('available', 'Available')],
+        default='available'
+    )
     def __str__(self):
         return self.serial_number
     
