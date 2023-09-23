@@ -36,6 +36,11 @@ class Allocation(models.Model):
     return_condition = models.TextField()
     checkout_datetime = models.DateTimeField(auto_now_add=True)
     return_datetime = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[('checked_out', 'Checked Out'), ('available', 'Available')],
+        default='available'
+    )
 
     def __str__(self):
         return f"{self.serial_number} assigned to {self. employee_id} from {self.start_date} to {self.end_date}"
