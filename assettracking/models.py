@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Company(models.Model):
     company_name = models.CharField(max_length=100)
-    address = models.TextField()
+    address = models.TextField(max_length=100)
    
     def __str__(self):
-        return self.company_name
+        return f"{self.company_name} - {self.address}"
     
 
 class Employee(models.Model):
@@ -18,7 +18,7 @@ class Employee(models.Model):
     employee_gender = models.CharField(max_length=50,null=True)
 
     def __str__(self):
-        return self.employee_id
+          return f"ID: {self.employee_id}, Name: {self.employee_name}, Dept: {self.employee_dept}, Contact: {self.employee_contact}, Gender: {self.employee_gender}"
     
 class Device(models.Model):
     device_name = models.CharField(max_length=100)
@@ -30,7 +30,7 @@ class Device(models.Model):
         default='available'
     )
     def __str__(self):
-        return self.serial_number
+         return f"Serial Number: {self.serial_number}, Name: {self.device_name}, Info: {self.device_info}, Status: {self.status}"
     
 class Allocation(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)

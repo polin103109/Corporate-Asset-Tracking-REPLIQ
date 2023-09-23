@@ -1,22 +1,24 @@
 #rom django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from assettracking.models import Company
+from assettracking.serializers import CompanySerializer
 
-from rest_framework import generics
-from .models import Company, Employee, Device, Allocation
-from .serializers import CompanySerializer, EmployeeSerializer, DeviceSerializer, AllocationSerializer
+@csrf_exempt
+def company_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        apivar = Company.objects.all()
+        serializer = CompanySerializer(apivar, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-class CompanyListCreateView(generics.ListCreateAPIView):
-    queryset = Company.objects.all()
-    serializer_class = CompanySerializer
-
-class EmployeeListCreateView(generics.ListCreateAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-
-class DeviceListCreateView(generics.ListCreateAPIView):
-    queryset = Device.objects.all()
-    serializer_class = DeviceSerializer
-
-class AllocationListCreateView(generics.ListCreateAPIView):
-    queryset = Allocation.objects.all()
-    serializer_class = AllocationSerializer
-
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = CompanySerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)

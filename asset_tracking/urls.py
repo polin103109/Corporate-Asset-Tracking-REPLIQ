@@ -22,10 +22,8 @@ from assettracking import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('companies/', views.CompanyListCreateView.as_view(), name='company-list'),
-    path('employees/', views.EmployeeListCreateView.as_view(), name='employee-list'),
-    path('devices/', views.DeviceListCreateView.as_view(), name='device-list'),
-    path('allocations/', views.AllocationListCreateView.as_view(), name='allocation-list'),
+    path('companies/', views.company_list),
+   
 ]
 
 
