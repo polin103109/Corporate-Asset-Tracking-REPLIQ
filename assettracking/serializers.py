@@ -1,5 +1,7 @@
+# assettracking/serializers.py
+
 from rest_framework import serializers
-from .models import Company, Employee, Device, Allocation
+from .models import Company, Employee, Device, Allocation, DeviceLog
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,12 +18,12 @@ class DeviceSerializer(serializers.ModelSerializer):
         model = Device
         fields = '__all__'
 
-class AllocationSerializer(serializers.ModelSerializer):
+class DeviceAllocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Allocation
         fields = '__all__'
 
-
-
-
-
+class DeviceLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DeviceLog
+        fields = '__all__'
