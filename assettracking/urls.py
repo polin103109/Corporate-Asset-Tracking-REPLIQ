@@ -3,9 +3,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from assettracking.views import (
-    CompanyListCreateView, EmployeeListCreateView,
-    DeviceListCreateView, DeviceAllocationListCreateView,
-    DeviceLogListCreateView
+    CompanyListCreateView,EmployeeListCreateView,DeviceListCreateView,DeviceAllocationListCreateView,DeviceLogListCreateView
 )
 
 router = DefaultRouter()
@@ -16,5 +14,6 @@ urlpatterns = [
     path('devices/', DeviceListCreateView.as_view(), name='device-list-create'),
     path('device-allocations/', DeviceAllocationListCreateView.as_view(), name='device-allocation-list-create'),
     path('device-logs/', DeviceLogListCreateView.as_view(), name='device-log-list-create'),
+   
 ]
 
