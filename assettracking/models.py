@@ -31,10 +31,9 @@ class Device(models.Model):
     )
     def __str__(self):
          return f"Serial Number: {self.serial_number}, Name: {self.device_name}, Info: {self.device_info}, Status: {self.status}"
-    
 class Allocation(models.Model):
-    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    serial_number = models.ForeignKey(Device, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
     checkout_condition = models.TextField()
@@ -48,4 +47,4 @@ class Allocation(models.Model):
     )
 
     def __str__(self):
-        return f"{self.serial_number} assigned to {self. employee_id} from {self.start_date} to {self.end_date}"
+        return f"{self.device.serial_number} assigned to {self.employee.employee_name} from {self.start_date} to {self.end_date}"    
